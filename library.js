@@ -2,42 +2,42 @@
 //The library should be aware of a number of shelves. Each shelf should know what books it contains.
 // Make the book object have "enshelf" and "unshelf" methods that control what shelf the book is sitting on.
 //The library should have a method to report all books it contains.
-//http://stackoverflow.com/questions/7106410/looping-through-arrays-of-arrays
 
-function Library(shelves) {
-  this.shelves = shelves
-  numShelves = shelves.length
-  alert("The number of shelves in the library is " + shelves.length)
-  printBooks = function(publicLibrary) {
-    if ( typeof(publicLibrary) == "object") {
-        for (var i = 0; i < arr.length; i++) {
-            printBooks(publicLibrary[i]);
-        }
-    }
-}
-
-function Shelf(books) {
-  this.books = books
-  alert names of books
-}
-
-function Book(title) {
-  this.title = title
-  function enshelf(shelf) {
-    shelf.books.push(this)
+function Library(shelfNum) {
+  this.shelves = new Array();
+  for (var i = 0; i < shelfNum; i++) {
+    this.shelves[i] = new Shelf();
   }
-  function unshelf() {
-    unshelf
-  }
+  //console.log(this.shelves);
 }
 
-//testing
 
-var publicLibrary = new Library([new Shelf(), new Shelf()])
-var book1 = new Book("Twilight")
+function Shelf() {
+  this.books = new Array();
+}
 
-lib.report();
+function Book(bookTitle) {
+  this.bookTitle = bookTitle
+  this.shelf = null;
+}
+
+Book.prototype.enshelf = function(shelf) {
+    this.shelf = shelf
+    shelf.books.push(this.bookTitle);    
+ }
+
+ Book.prototype.deshelf = function() {
+    books = this.shelf.books
+    books.splice(books.indexOf(this.bookTitle));
+    this.shelf = null;
+ }
+
+
+var publicLibrary = new Library(2);
+var book1 = new Book('Twilight');
+var book2 = new Book('LotR');
+book2.enshelf(publicLibrary.shelves[0]);
 book1.enshelf(publicLibrary.shelves[0]);
-Library.printBooks(publicLibrary)
-book1.unshelf()
-Library.printBooks(publicLibrary)
+console.log(publicLibrary.shelves[0]);
+book1.deshelf();
+console.log(publicLibrary.shelves[0]);
