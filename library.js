@@ -24,7 +24,6 @@ function Shelf(books) {
 function Book(title) {
   this.title = title
   function enshelf(shelf) {
-    if (this.shelf == "object") unshelf()
     shelf.books.push(this)
   }
   function unshelf() {
@@ -32,11 +31,11 @@ function Book(title) {
   }
 }
 
+//testing
+
 var publicLibrary = new Library([new Shelf(), new Shelf()])
 var book1 = new Book("Twilight")
 
-
-//testing
 lib.report();
 book1.enshelf(publicLibrary.shelves[0]);
 Library.printBooks(publicLibrary)
